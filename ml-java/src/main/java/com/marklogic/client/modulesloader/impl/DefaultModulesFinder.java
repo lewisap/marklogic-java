@@ -32,7 +32,8 @@ public class DefaultModulesFinder implements ModulesFinder {
         List<File> services = new ArrayList<>();
         if (servicesBaseDir.exists()) {
             for (File f : servicesBaseDir.listFiles()) {
-                if (FilenameUtil.isXqueryFile(f.getName())) {
+                if (FilenameUtil.isXqueryFile(f.getName()) ||
+                    FilenameUtil.isJavascriptFile(f.getName())) {
                     services.add(f);
                 }
             }
@@ -133,7 +134,9 @@ class TransformFilenameFilter implements FilenameFilter {
 
     @Override
     public boolean accept(File dir, String name) {
-        return FilenameUtil.isXslFile(name) || FilenameUtil.isXqueryFile(name);
+        return  FilenameUtil.isXslFile(name) ||
+                FilenameUtil.isXqueryFile(name) ||
+                FilenameUtil.isJavascriptFile(name);
     }
 
 }
